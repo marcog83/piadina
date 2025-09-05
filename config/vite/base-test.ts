@@ -33,6 +33,5 @@ export const baseTest: InlineConfig = {
   exclude: [ 'node_modules' ],
   reporters: [
     'default',
-    [ 'vitest-sonar-reporter', { outputFile: 'test-report.xml' }],
   ],
 };

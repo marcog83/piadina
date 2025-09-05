@@ -1,18 +1,7 @@
 {
-  "extends": "./config/typescript/base-tsconfig.json",
+  "extends": "@total-typescript/tsconfig/bundler/dom",
   "compilerOptions": {
     "jsx": "react-jsx",
-    "noEmit": true,
-    "baseUrl": "./",
-    "incremental": true,
-    "declarationMap": true,
-    "skipLibCheck": true,
-    "strictNullChecks": true,
-    "strict": true
-  },
-  "include": [
-    "**/*.ts",
-    "**/*.tsx",
-    "demo/server.js"
-  ]
+    "baseUrl": "./"
+  }
 }
