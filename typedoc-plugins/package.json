@@ -1,0 +1,13 @@
+{
+    "name": "typedoc-internal-plugins",
+    "version": "0.0.1",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "tsup-node --format esm,cjs ./src/typedoc-clarity.tsx ./src/contributors/typedoc-contributors.tsx"
+        
+    },
+    "devDependencies": {
+        "tsup":"8.3.6"
+    }
+}

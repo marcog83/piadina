@@ -1,0 +1,27 @@
+{
+    "compilerOptions": {
+      "outDir": "./dist",
+      "declaration": true,
+      "esModuleInterop": true,
+      "experimentalDecorators": true,
+      "forceConsistentCasingInFileNames": true,
+      "lib": ["es2018", "dom"],
+      "module": "preserve",
+      "moduleResolution": "bundler",
+      "noImplicitAny": false,
+      "noUnusedLocals": true,
+      "removeComments": true,
+      "sourceMap": false,
+      "strictNullChecks": true,
+      "target": "es2018",
+      "jsx": "react",
+      "jsxFactory": "JSX.createElement",
+      "jsxFragmentFactory": "JSX.Fragment"
+    },
+    "include": [
+      "**/typedoc-*.tsx",
+    ],
+    "exclude": [
+      "node_modules",
+      "out"]
+  }

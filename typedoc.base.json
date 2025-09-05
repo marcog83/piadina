@@ -1,0 +1,21 @@
+{
+  "$schema": "https://typedoc.org/schema.json",
+  "includeVersion": true,
+  "sourceLinkExternal": true,
+  "categoryOrder": [
+    "Providers",
+    "Components",
+    "Hooks",
+    "Types",
+    "*"
+  ],
+  "exclude": [
+    "**/*+(index|.spec|.e2e).ts",
+    "**/*+(index|.spec|.e2e).tsx"
+  ],
+  "excludeInternal": true,
+  "excludeExternals": true,
+  "suppressCommentWarningsInDeclarationFiles": true,
+  "groupReferencesByType": true,
+  "categorizeByGroup": true,
+}
