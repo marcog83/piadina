@@ -1,5 +1,5 @@
 {
-    "name": "@m3-po-sdk/scheme-up",
+    "name": "@pesto/scheme-up",
     "version": "0.0.1",
     "main": "./dist/index.umd.cjs",
     "module": "./dist/index.js",
@@ -30,7 +30,6 @@
         "lint": "wireit",
         "test:watch": "vitest",
         "test": "vitest run --coverage",
-        "publish-package": "safe-publish",
         "update-deps": "npx npm-check-updates -u"
     },
     "wireit": {
