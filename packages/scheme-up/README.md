@@ -1,9 +1,9 @@
 # Installation
 
-`Scheme-up` is a full working **framework-agnostic**, **type-safe**, **semver-compatible**, **auto-upgrading**, **typia-validated**, versioned API response handler.
+`Scheme-up` is a full working **framework-agnostic**, **type-safe**, **semver-compatible**, **auto-upgrading**, versioned API response handler.
 
 ```bash
-npm install @m3-po-sdk/scheme-up
+npm install @pesto/scheme-up
 ```
 
 # Usage
