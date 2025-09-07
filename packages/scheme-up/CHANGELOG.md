@@ -1,4 +1,4 @@
-# @m3-po-sdk/scheme-up
+# @pesto/scheme-up
 
 ## 0.0.1
 
