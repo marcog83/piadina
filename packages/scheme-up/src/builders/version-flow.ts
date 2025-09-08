@@ -2,7 +2,7 @@ import semver from 'semver';
 import type { CatchCallback, VersionedObject } from '../scheme-up.types';
 import { FlowError } from './error-codes';
 import { MigrationChain } from './migration-chain';
-import { NodeBuilder } from './node-builder';
+import { NodeBuilder, type INodeBuilder } from './node-builder';
 
 /**
  * VersionFlow is a class that allows you to build a migration flow for versioned objects.
@@ -29,7 +29,7 @@ import { NodeBuilder } from './node-builder';
  * @category Builders
  */
 export class VersionFlow<TFinalOutput = unknown> {
-  #nodes: NodeBuilder[] = [];
+  #nodes: INodeBuilder[] = [];
 
   #catch?: CatchCallback<TFinalOutput>;
 
@@ -41,7 +41,7 @@ export class VersionFlow<TFinalOutput = unknown> {
  * The NodeBuilder instance is used to build a migration node that can be added to the flow.
  *
  */
-  add<TInput, TOutput=TInput>(callback: (builder: NodeBuilder<TInput, TOutput>) => void): this {
+  add<TInput extends VersionedObject=VersionedObject, TOutput extends VersionedObject = TInput>(callback: (builder: NodeBuilder<TInput, TOutput>) => void): this {
     const nodeBuilder = new NodeBuilder<TInput, TOutput>();
 
     callback(nodeBuilder);

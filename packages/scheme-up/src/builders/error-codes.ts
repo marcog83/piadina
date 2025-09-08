@@ -98,7 +98,7 @@ export const ERROR_MESSAGES: Record<ErrorCode, string> = {
  * @category Errors
  */
 export class FlowError extends Error {
-  override public cause: {
+  public override cause: {
     code: ErrorCode;
     data?: string | Record<PropertyKey, unknown>;
   };

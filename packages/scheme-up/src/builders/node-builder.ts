@@ -1,5 +1,10 @@
-import type { MigrationNode, SemverRange } from '../scheme-up.types';
+import type { MigrationNode, SemverRange, VersionedObject } from '../scheme-up.types';
 import { FlowError, ERR_NO_ASSERT_FUNCTION } from './error-codes';
+
+export interface INodeBuilder {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  build(): MigrationNode<any, any>;
+}
 
 /**
  * NodeBuilder is a class that allows you to build a migration node for a versioned object.
@@ -24,7 +29,10 @@ import { FlowError, ERR_NO_ASSERT_FUNCTION } from './error-codes';
  * ```
  * @category Builders
  */
-export class NodeBuilder<TInput=unknown, TOutput=unknown> {
+export class NodeBuilder<
+  TInput extends VersionedObject = VersionedObject,
+  TOutput extends VersionedObject = VersionedObject
+> implements INodeBuilder {
   #version: SemverRange = '1.0.0';
 
   #semverRange: SemverRange = '~1.0.0';

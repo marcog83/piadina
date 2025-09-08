@@ -1,4 +1,4 @@
-import { FlowError } from '@builders/error-codes';
+import { FlowError } from '@/builders/error-codes';
 
 /**
  * Type for the version in semantic versioning format.
@@ -33,7 +33,7 @@ export type SemverRange =
  * Type for the migration node, which includes version, semver range, assert function, and an optional migrate function.
  * @category Types
  */
-export type MigrationNode<TInput=unknown, TOutput=unknown> = {
+export type MigrationNode<TInput=unknown, TOutput extends VersionedObject = VersionedObject> = {
   /**
    * Version of the migration node, following semantic versioning.
    * It specifies the version of the schema that this node applies to.
@@ -62,7 +62,7 @@ export type MigrationNode<TInput=unknown, TOutput=unknown> = {
  * It is used to represent objects that have a specific version associated with them.
  * @category Types
  */
-export type VersionedObject = {} & Record<'version', string>;
+export type VersionedObject =  Record<'version', string>;
 
 /**
  * SuccessSchemeResult is a type that represents a successful result of a scheme operation.

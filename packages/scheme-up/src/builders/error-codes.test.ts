@@ -238,6 +238,44 @@ describe('Error Codes', () => {
       });
     });
 
+    describe('FlowError.from data extraction', () => {
+      it('should use err.cause.data if present', () => {
+        const error = new Error('msg');
+        error.cause = { code: ERR_UNKNOWN, data: { foo: 'bar' } };
+        const flowError = FlowError.from(error);
+
+        expect(flowError.cause.data).toEqual({ foo: 'bar' });
+      });
+
+      it('should use ERR_UNKNOWN if code error is not mapped', () => {
+        const error = new Error('msg');
+        error.cause = { code: 'not mapped', data: { foo: 'bar' } };
+        const flowError = FlowError.from(error);
+
+        expect(flowError.message).toEqual(ERROR_MESSAGES[ERR_UNKNOWN]);
+        expect(flowError.cause.code).toEqual('not mapped');
+      });
+
+      it('should use err.message if cause.data is undefined', () => {
+        const error = new Error('my custom message');
+        error.cause = { code: ERR_UNKNOWN };
+        const flowError = FlowError.from(error);
+
+        expect(flowError.cause.data).toBe('my custom message');
+      });
+
+      it('should use fallback message if both cause.data and err.message are undefined', () => {
+        // Simulate an error with no message and no cause.data
+        const error = new Error('');
+        error.cause = { code: ERR_UNKNOWN };
+        // Overwrite message to undefined (not typical, but for coverage)
+        Object.defineProperty(error, 'message', { value: undefined });
+        const flowError = FlowError.from(error);
+
+        expect(flowError.cause.data).toBe(ERROR_MESSAGES[ERR_UNKNOWN]);
+      });
+    });
+
     describe('error inheritance', () => {
       it('should inherit from Error correctly', () => {
         const error = new FlowError(ERR_NO_ASSERT_FUNCTION);

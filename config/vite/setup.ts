@@ -1,5 +1,5 @@
 import { cleanup } from '@testing-library/react';
-import { vi } from 'vitest';
+import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 import '@testing-library/jest-dom';
 
 // Clean up after each test
@@ -7,12 +7,10 @@ afterEach(() => {
   cleanup();
 });
 
-// Add Jest compatibility layer for legacy code
-globalThis.jest = vi;
 const RealDate = Date.now;
 
 beforeAll(() => {
-  global.Date.now = jest.fn(() => new Date('2019-04-07T10:20:30Z').getTime());
+  global.Date.now = vi.fn(() => new Date('2019-04-07T10:20:30Z').getTime());
 });
 
 afterAll(() => {
@@ -26,6 +24,6 @@ beforeAll(() => {
   }
 
   if (!global.crypto.randomUUID) {
-    global.crypto.randomUUID = jest.fn();
+    global.crypto.randomUUID = vi.fn();
   }
 });

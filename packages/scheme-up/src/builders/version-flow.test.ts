@@ -735,7 +735,8 @@ describe('VersionFlow', () => {
           age: 25,
         },
       } as const;
-
+      
+      //@ts-expect-error - version cannot be number
       const [ isSuccess, result ] = builder.execute(input);
 
       expect(isSuccess).toBe(false);
