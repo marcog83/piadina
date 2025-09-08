@@ -1,10 +1,11 @@
-# 🥬 Trito
-Trito, pronounced [ˈtriː.to] — like TREE-toh. It is collection of small, flavorful utilities for modern JavaScript/TypeScript projects.
+# 🫓 Piadina
+flatbread from Romagna, Italian street food classic, pronounced [pjaˈdiːna] — like *pya-DEE-nah*. It is collection of small, flavorful utilities for modern JavaScript/TypeScript projects.
 
-Each package is independent, like ingredients — mix only what you need.
+It’s a base (you can fill it with anything) → exactly like each package. — mix only what you need.
+
 ## Philosophy
 
-Trito is about:
+Piadina is about:
 
 * **Small portions** → each package solves one problem.
 

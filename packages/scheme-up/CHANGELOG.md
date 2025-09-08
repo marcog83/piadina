@@ -1,4 +1,4 @@
-# @trito/scheme-up
+# @piadina/scheme-up
 
 ## 0.0.1
 

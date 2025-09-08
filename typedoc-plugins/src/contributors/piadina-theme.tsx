@@ -4,7 +4,7 @@
 
 import { DefaultTheme, DefaultThemeRenderContext, PageEvent, Reflection, JSX, ReflectionKind, Renderer } from 'typedoc';
 
-class TritoThemeContext extends DefaultThemeRenderContext {
+class PiadinaThemeContext extends DefaultThemeRenderContext {
   // Important: If you use `this`, this function MUST be bound! Template functions
   // are free to destructure the context object to only grab what they care about.
   override footer = () => (
@@ -16,11 +16,11 @@ class TritoThemeContext extends DefaultThemeRenderContext {
   );
 }
 
-export class TritoTheme extends DefaultTheme {
+export class PiadinaTheme extends DefaultTheme {
   constructor(renderer: Renderer) {
     super(renderer);
     this.icons = {
-      'Trito-package-icon': () => (
+      'Piadina-package-icon': () => (
         <svg
           width="20"
           height="20"
@@ -41,7 +41,7 @@ export class TritoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'Trito-kit-icon': () => (
+      'Piadina-kit-icon': () => (
         <svg
           width="20"
           height="20"
@@ -62,7 +62,7 @@ export class TritoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'Trito-react-icon': () => (
+      'Piadina-react-icon': () => (
         <svg
           width="20"
           height="20"
@@ -83,7 +83,7 @@ export class TritoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'Trito-document-icon': () => (
+      'Piadina-document-icon': () => (
         <svg
           width="20"
           height="20"
@@ -109,20 +109,20 @@ export class TritoTheme extends DefaultTheme {
   }
 
   getRenderContext(pageEvent: PageEvent<Reflection>) {
-    return new TritoThemeContext(this.router, this, pageEvent, this.application.options);
+    return new PiadinaThemeContext(this.router, this, pageEvent, this.application.options);
   }
 
   override getReflectionIcon(reflection: Reflection) {
     if (reflection.kind === ReflectionKind.Module) {
       if (reflection.name.match('Kit')) {
-        return 'Trito-kit-icon';
+        return 'Piadina-kit-icon';
       } if (reflection.name.match('React')) {
-        return 'Trito-react-icon';
+        return 'Piadina-react-icon';
       }
 
-      return 'Trito-package-icon';
+      return 'Piadina-package-icon';
     } if (reflection.kind === ReflectionKind.Document) {
-      return 'Trito-document-icon';
+      return 'Piadina-document-icon';
     }
 
     return reflection.kind;

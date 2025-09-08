@@ -3,7 +3,7 @@
 `Scheme-up` is a full working **framework-agnostic**, **type-safe**, **semver-compatible**, **auto-upgrading**, versioned API response handler.
 
 ```bash
-npm install @trito/scheme-up
+npm install @piadina/scheme-up
 ```
 
 # Usage

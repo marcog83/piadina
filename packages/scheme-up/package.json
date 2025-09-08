@@ -1,5 +1,5 @@
 {
-    "name": "@trito/scheme-up",
+    "name": "@piadina/scheme-up",
     "version": "0.0.1",
     "main": "./dist/index.umd.cjs",
     "module": "./dist/index.js",

@@ -4,8 +4,8 @@
 
 import { Application, JSX } from 'typedoc';
 
-import { TritoTheme } from './trito-theme';
+import { PiadinaTheme } from './piadina-theme';
 
 export function load(app: Application) {
-  app.renderer.defineTheme('trito-theme', TritoTheme);
+  app.renderer.defineTheme('piadina-theme', PiadinaTheme);
 }

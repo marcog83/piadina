@@ -4,8 +4,8 @@
     "packages/*"
   ],
   
-  "name": "Trito",
-  "theme": "trito-theme",
+  "name": "Piadina",
+  "theme": "piadina-theme",
   "entryPointStrategy": "packages",
   "includeVersion": false,
   "plugin": [
@@ -15,7 +15,7 @@
     "includeCategories": true,
   },
   "navigationLinks": {
-    "Github": "https://github.com/marcog83/trito"
+    "Github": "https://github.com/marcog83/piadina"
   },
   "exclude": [
     "**/*+(index|.spec|.e2e).ts",
