@@ -5,6 +5,11 @@
     "module": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/marcog83/piadina.git",
+        "directory": "packages/scheme-up"
+    },
     "files": [
         "dist"
     ],
@@ -96,5 +101,18 @@
     },
     "devDependencies": {
         "@types/semver": "7.7.0"
-    }
+    },
+    "keywords": [
+        "versioned",
+        "api",
+        "schema",
+        "migration",
+        "semver",
+        "typescript",
+        "validation",
+        "json",
+        "type-safe",
+        "data",
+        "upgrade"
+    ]
 }

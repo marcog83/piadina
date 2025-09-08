@@ -32,17 +32,19 @@
     "docs": "typedoc --suppressCommentWarningsInDeclarationFiles",
     "predocs": "cd typedoc-plugins && npm run build"
   },
-  "author": "",
-  "license": "UNLICENSED",
+  "author": "marcog83",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/marcog83/piadina.git"
+  },
+  "license": "MIT",
   "private": true,
   "engines": {
-    "node": ">= 20",
-    "npm": ">= 10"
+    "node": ">= 24",
+    "npm": ">= 11"
   },
   "workspaces": [
     "packages/scheme-up",
-    "packages/common-utilities",
-    "demo",
     "typedoc-plugins"
   ],
   "dependencies": {},
