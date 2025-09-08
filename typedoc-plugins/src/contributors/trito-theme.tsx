@@ -1,7 +1,4 @@
 /* eslint-disable react/no-unknown-property */
-/* eslint-disable class-methods-use-this */
-/* eslint-disable max-classes-per-file */
-/* eslint-disable @typescript-eslint/no-unused-vars */
 /** @jsx JSX.createElement */
 /** @jsxFrag JSX.Fragment */
 
