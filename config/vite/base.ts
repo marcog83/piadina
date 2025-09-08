@@ -11,11 +11,11 @@ dotEnv.config({
   path: resolve(__dirname, '.env'),
 });
 
-export type BasePestoConfig = {
+export type BaseTritoConfig = {
   mode: string, __dirname: string, externals?: string []
 };
 
-export default ({ mode, __dirname, externals = [] }: BasePestoConfig) => {
+export default ({ mode, __dirname, externals = [] }: BaseTritoConfig) => {
   const isProduction = mode === 'production';
   const isTest = process.env.NODE_ENV === 'test' || process.env.VITEST;
 

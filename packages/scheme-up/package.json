@@ -1,5 +1,5 @@
 {
-    "name": "@pesto/scheme-up",
+    "name": "@trito/scheme-up",
     "version": "0.0.1",
     "main": "./dist/index.umd.cjs",
     "module": "./dist/index.js",
@@ -30,7 +30,8 @@
         "lint": "wireit",
         "test:watch": "vitest",
         "test": "vitest run --coverage",
-        "update-deps": "npx npm-check-updates -u"
+        "update-deps": "npx npm-check-updates -u",
+        "publish":"npm publish --access public"
     },
     "wireit": {
         "lint": {

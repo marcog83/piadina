@@ -4,8 +4,8 @@
     "packages/*"
   ],
   
-  "name": "Pesto",
-  "theme": "pesto-theme",
+  "name": "Trito",
+  "theme": "trito-theme",
   "entryPointStrategy": "packages",
   "includeVersion": false,
   "plugin": [
@@ -15,7 +15,7 @@
     "includeCategories": true,
   },
   "navigationLinks": {
-    "Github": "https://github.com/marcog83/pesto"
+    "Github": "https://github.com/marcog83/trito"
   },
   "exclude": [
     "**/*+(index|.spec|.e2e).ts",

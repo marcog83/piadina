@@ -1,4 +1,4 @@
-# @pesto/scheme-up
+# @trito/scheme-up
 
 ## 0.0.1
 

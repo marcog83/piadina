@@ -7,7 +7,7 @@
 
 import { DefaultTheme, DefaultThemeRenderContext, PageEvent, Reflection, JSX, ReflectionKind, Renderer } from 'typedoc';
 
-class PestoThemeContext extends DefaultThemeRenderContext {
+class TritoThemeContext extends DefaultThemeRenderContext {
   // Important: If you use `this`, this function MUST be bound! Template functions
   // are free to destructure the context object to only grab what they care about.
   override footer = () => (
@@ -19,11 +19,11 @@ class PestoThemeContext extends DefaultThemeRenderContext {
   );
 }
 
-export class PestoTheme extends DefaultTheme {
+export class TritoTheme extends DefaultTheme {
   constructor(renderer: Renderer) {
     super(renderer);
     this.icons = {
-      'pesto-package-icon': () => (
+      'Trito-package-icon': () => (
         <svg
           width="20"
           height="20"
@@ -44,7 +44,7 @@ export class PestoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'pesto-kit-icon': () => (
+      'Trito-kit-icon': () => (
         <svg
           width="20"
           height="20"
@@ -65,7 +65,7 @@ export class PestoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'pesto-react-icon': () => (
+      'Trito-react-icon': () => (
         <svg
           width="20"
           height="20"
@@ -86,7 +86,7 @@ export class PestoTheme extends DefaultTheme {
           </text>
         </svg>
       ),
-      'pesto-document-icon': () => (
+      'Trito-document-icon': () => (
         <svg
           width="20"
           height="20"
@@ -112,20 +112,20 @@ export class PestoTheme extends DefaultTheme {
   }
 
   getRenderContext(pageEvent: PageEvent<Reflection>) {
-    return new PestoThemeContext(this.router, this, pageEvent, this.application.options);
+    return new TritoThemeContext(this.router, this, pageEvent, this.application.options);
   }
 
   override getReflectionIcon(reflection: Reflection) {
     if (reflection.kind === ReflectionKind.Module) {
       if (reflection.name.match('Kit')) {
-        return 'pesto-kit-icon';
+        return 'Trito-kit-icon';
       } if (reflection.name.match('React')) {
-        return 'pesto-react-icon';
+        return 'Trito-react-icon';
       }
 
-      return 'pesto-package-icon';
+      return 'Trito-package-icon';
     } if (reflection.kind === ReflectionKind.Document) {
-      return 'pesto-document-icon';
+      return 'Trito-document-icon';
     }
 
     return reflection.kind;
