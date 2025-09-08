@@ -10,7 +10,7 @@ This tutorial demonstrates how to use the VersionFlow class to validate and migr
 Before starting, install the required dependencies:
 
 ```bash
-npm install @m3-po-sdk/scheme-up zod
+npm install @pesto/scheme-up zod
 ```
 
 We'll use [Zod](https://zod.dev/) for runtime validation in our advanced examples, as it provides:
@@ -381,7 +381,7 @@ async function loadUserPreferences() {
 
 ```tsx
 // services/user-preferences.ts (with error handling)
-import { VersionFlow } from '@m3-po-sdk/scheme-up';
+import { VersionFlow } from '@pesto/scheme-up';
 import type { UserPreferencesV2Data } from '../types/user-preferences';
 
 const preferencesFlow = new VersionFlow<UserPreferencesV2>()

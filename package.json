@@ -29,7 +29,6 @@
     "update-deps:all": "npm run update-deps --workspaces --if-present --  --interactive",
     "<-- MANUAL SCRIPT TO UPDATE ALL PACKAGE.JSON -->": "''",
     "update-pkg": "node ./scripts/update-package-json.mjs",
-    "update-sonar-properties": "node ./scripts/update-sonar-properties.mjs",
     "docs": "typedoc --suppressCommentWarningsInDeclarationFiles",
     "predocs": "cd typedoc-plugins && npm run build"
   },
