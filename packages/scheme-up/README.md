@@ -13,7 +13,7 @@ npm install @piadina/scheme-up
 ### Key Use Cases
 
 1. **Versioned API Responses**: When your backend evolves but older clients still exist, scheme-up ensures responses are validated and upgraded automatically.
-   1. Example: migrating user preferences from V1 → V2 without breaking older apps.
+   * Example: migrating user preferences from V1 → V2 without breaking older apps.
 2. **Data Schema Migrations**: For persisted data (local storage, DB JSON fields, config files) that evolves over time, scheme-up applies a controlled migration flow.
    * Example: upgrading settings structure in a local app without losing user data.
 3. **Framework-Agnostic Validation**: Works in React, Node, Deno, or any JS runtime without tying you to a framework
