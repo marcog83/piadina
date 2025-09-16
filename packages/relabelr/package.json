@@ -97,19 +97,20 @@
     },
     "sideEffects": false,
     "keywords": [
-        "jsonl",
-        "json-lines",
-        "ndjson",
-        "streaming",
-        "fetch",
-        "async-generator",
+        "label",
+        "filename",
+        "duplicate",
+        "copy",
+        "increment",
+        "unique",
+        "naming",
+        "collision",
+        "file-management",
         "typescript",
-        "line-by-line",
-        "json",
-        "parser",
-        "http",
-        "api",
-        "data-streaming",
-        "newline-delimited"
+        "utilities",
+        "string-manipulation",
+        "conflict-resolution",
+        "auto-increment",
+        "label-generation"
     ]
 }
