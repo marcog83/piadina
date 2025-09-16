@@ -8,6 +8,12 @@ It’s a base (you can fill it with anything) → exactly like each package. —
 * **@piadina/scheme-up**
   * Type-safe, versioned API response handler with automatic migrations and semver support. Perfect for evolving JSON contracts over time.
   * [Full tutorial & examples](packages/scheme-up/how-to-create-version-flow.md)
+* **@piadina/fetch-jsonl**
+  * Stream and parse JSON Lines (JSONL/NDJSON) directly with fetch. Yields parsed JSON objects one line at a time using async generators.
+  * Perfect for handling large datasets, streaming APIs, and real-time data processing.
+* **@piadina/relabelr**
+  * Smart label and filename conflict resolution with customizable copy formats. Automatically generates unique names like "Copy", "Copy (1)", or custom patterns.
+  * Ideal for file management systems, document editors, and preventing duplicate names in UIs.
 
 ## Installation
 
