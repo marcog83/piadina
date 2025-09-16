@@ -96,23 +96,20 @@
         }
     },
     "sideEffects": false,
-    "dependencies": {
-        "semver": "7.7.2"
-    },
-    "devDependencies": {
-        "@types/semver": "7.7.0"
-    },
     "keywords": [
-        "versioned",
-        "api",
-        "schema",
-        "migration",
-        "semver",
+        "jsonl",
+        "json-lines",
+        "ndjson",
+        "streaming",
+        "fetch",
+        "async-generator",
         "typescript",
-        "validation",
+        "line-by-line",
         "json",
-        "type-safe",
-        "data",
-        "upgrade"
+        "parser",
+        "http",
+        "api",
+        "data-streaming",
+        "newline-delimited"
     ]
 }
