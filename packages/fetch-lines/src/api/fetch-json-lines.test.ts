@@ -322,7 +322,7 @@ describe('FetchJSONL', () => {
       }
 
       expect(mockFetchCalls).toHaveLength(1);
-      expect(mockFetchCalls[0].url).toBe('https://api.test/custom.jsonl');
+      expect(mockFetchCalls[0]?.url).toBe('https://api.test/custom.jsonl');
       expect(results).toEqual([{ id: 1, name: 'Custom Fetch' }]);
     });
 
@@ -350,8 +350,8 @@ describe('FetchJSONL', () => {
       }
 
       expect(results).toHaveLength(1);
-      expect(results[0].createdAt).toBeInstanceOf(Date);
-      expect((results[0].createdAt as Date).toISOString()).toBe('2023-01-01T00:00:00.000Z');
+      expect(results[0]?.createdAt).toBeInstanceOf(Date);
+      expect((results[0]?.createdAt as Date).toISOString()).toBe('2023-01-01T00:00:00.000Z');
     });
 
     it('should apply before request hooks', async () => {
@@ -485,7 +485,7 @@ describe('FetchJSONL', () => {
       }
 
       expect(results).toHaveLength(1);
-      expect(results[0].timestamp).toBeInstanceOf(Date);
+      expect(results[0]?.timestamp).toBeInstanceOf(Date);
     });
   });
 

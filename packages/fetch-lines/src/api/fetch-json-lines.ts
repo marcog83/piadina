@@ -72,7 +72,7 @@ export class FetchJSONL {
     }
   }
 
-  #validateRequestMethod(input: RequestInfo, expected: string) {
+  #validateRequestMethod(input: RequestInfo | URL, expected: string) {
     if (input instanceof Request && input.method.toUpperCase() !== expected) {
       throw new Error(
         `Request method mismatch: expected ${expected}, got ${input.method}`,
