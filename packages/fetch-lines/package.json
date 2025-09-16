@@ -36,7 +36,7 @@
         "test:watch": "vitest",
         "test": "vitest run --coverage",
         "update-deps": "npx npm-check-updates -u",
-        "publish":"npm publish --access public"
+        "publish-package":"npm publish --access public"
     },
     "wireit": {
         "lint": {
