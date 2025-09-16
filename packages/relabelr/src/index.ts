@@ -21,6 +21,9 @@
  * Custom Error classes, typed error payloads and helpers used to standardize error handling across the SDK.
  */
 
+export { relabelr, incrementFileName } from "@/utils/relabelr";
+
+
 /**
  * @ignore
  */

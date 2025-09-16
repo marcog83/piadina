@@ -2,6 +2,51 @@
 
 const MAX_SAFE_SMALL_INTEGER = 2 ** 28;
 
+export interface CopyFormat {
+  /** The copy keyword (e.g., "copy", "Copy") */
+  copyWord: string;
+  /** Format for the first copy (no number). Use {copyWord} as placeholder. */
+  firstCopyFormat: string;
+  /** Format for numbered copies. Use {copyWord} and {number} as placeholders. */
+  numberedCopyFormat: string;
+}
+
+const DEFAULT_COPY_FORMAT: CopyFormat = {
+  copyWord: 'copy',
+  firstCopyFormat: '{copyWord}',
+  numberedCopyFormat: '{copyWord} {number}',
+};
+
+// Predefined formats for common use cases
+export const COPY_FORMATS = {
+  /** "copy", "copy 2", "copy 3" */
+  DEFAULT: DEFAULT_COPY_FORMAT,
+  /** "Copy", "Copy 2", "Copy 3" */
+  CAPITALIZED: {
+    copyWord: 'Copy',
+    firstCopyFormat: '{copyWord}',
+    numberedCopyFormat: '{copyWord} {number}',
+  } as CopyFormat,
+  /** "copy", "copy 1", "copy 2" */
+  START_WITH_ONE: {
+    copyWord: 'copy',
+    firstCopyFormat: '{copyWord} 1',
+    numberedCopyFormat: '{copyWord} {number}',
+  } as CopyFormat,
+  /** "Copy (1)", "Copy (2)", "Copy (3)" */
+  PARENTHESES: {
+    copyWord: 'Copy',
+    firstCopyFormat: '{copyWord} (1)',
+    numberedCopyFormat: '{copyWord} ({number})',
+  } as CopyFormat,
+  /** "(1)", "(2)", "(3)" */
+  NUMBERS_ONLY: {
+    copyWord: '',
+    firstCopyFormat: '(1)',
+    numberedCopyFormat: '({number})',
+  } as CopyFormat,
+} as const;
+
 function splitFileName(name: string): { namePrefix: string, extSuffix: string } {
   const lastDotIndex = name.lastIndexOf('.');
 
@@ -15,47 +60,103 @@ function splitFileName(name: string): { namePrefix: string, extSuffix: string } 
   return { namePrefix: name, extSuffix: '' };
 }
 
-function incrementFileName(name: string): string {
+function formatCopy(format: string, copyWord: string, number?: number): string {
+  return format
+    .replace('{copyWord}', copyWord)
+    .replace('{number}', number?.toString() ?? '');
+}
+
+function escapeRegex(str: string): string {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+}
+
+function createRegexPattern(format: string, copyWord: string): string {
+  // Create a pattern by replacing placeholders and escaping the result
+  let pattern = format;
+  
+  // Replace placeholders with temporary markers
+  pattern = pattern
+    .replace('{copyWord}', '___COPYWORD___')
+    .replace('{number}', '___NUMBER___');
+    
+  // Escape the entire pattern
+  pattern = escapeRegex(pattern);
+  
+  // Replace temporary markers with actual regex patterns
+  pattern = pattern
+    .replace('___COPYWORD___', escapeRegex(copyWord))
+    .replace('___NUMBER___', '(\\d+)');
+    
+  return pattern;
+}
+
+export function incrementFileName(name: string, copyFormat: CopyFormat = COPY_FORMATS.DEFAULT): string {
   const { namePrefix, extSuffix } = splitFileName(name.trim());
 
-  // name copy 5(.txt) => name copy 6(.txt)
-  // name copy(.txt) => name copy 2(.txt)
-  const suffixRegex = /^(.+ copy)( \d+)?$/i;
-
-  if (suffixRegex.test(namePrefix)) {
-    return namePrefix.replace(suffixRegex, (_, g1?, g2?) => {
-      const number = (g2 ? parseInt(g2 as string, 10) : 1);
-
-      return number === 0
-        ? `${ g1 }`
-        : (number < MAX_SAFE_SMALL_INTEGER
-          ? `${ g1 } ${ number + 1 }`
-          : `${ g1 }${ g2 } copy`);
-    }) + extSuffix;
+  // Handle special case where copyWord is empty (like NUMBERS_ONLY format)
+  const hasEmptyCopyWord = copyFormat.copyWord === '';
+  
+  // Create patterns for matching numbered copies
+  const numberedPattern = createRegexPattern(copyFormat.numberedCopyFormat, copyFormat.copyWord);
+  const numberedRegex = new RegExp(`^(.+)\\s+${numberedPattern}$`, 'i');
+  const numberedMatch = namePrefix.match(numberedRegex);
+  
+  if (numberedMatch) {
+    const [, baseName, numberStr] = numberedMatch;
+    const number = parseInt(numberStr || '0', 10);
+    
+    if (number < MAX_SAFE_SMALL_INTEGER) {
+      const newSuffix = formatCopy(copyFormat.numberedCopyFormat, copyFormat.copyWord, number + 1);
+      return `${baseName} ${newSuffix}${extSuffix}`;
+    } else {
+      // If number is too large, append another copy
+      const newSuffix = formatCopy(copyFormat.firstCopyFormat, copyFormat.copyWord);
+      return `${namePrefix} ${newSuffix}${extSuffix}`;
+    }
+  }
+  
+  // Try to match first copy format (only if copyWord is not empty)
+  if (!hasEmptyCopyWord || copyFormat.firstCopyFormat !== copyFormat.numberedCopyFormat) {
+    const firstCopyPattern = createRegexPattern(copyFormat.firstCopyFormat, copyFormat.copyWord);
+    const firstCopyRegex = new RegExp(`^(.+)\\s+${firstCopyPattern}$`, 'i');
+    const firstCopyMatch = namePrefix.match(firstCopyRegex);
+    
+    if (firstCopyMatch) {
+      const [, baseName] = firstCopyMatch;
+      // Determine the next number based on the format
+      let nextNumber = 2;
+      if (copyFormat === COPY_FORMATS.START_WITH_ONE || copyFormat === COPY_FORMATS.PARENTHESES || copyFormat === COPY_FORMATS.NUMBERS_ONLY) {
+        nextNumber = 2;
+      }
+      const newSuffix = formatCopy(copyFormat.numberedCopyFormat, copyFormat.copyWord, nextNumber);
+      return `${baseName} ${newSuffix}${extSuffix}`;
+    }
   }
 
-  // name(.txt) => name copy(.txt)
-  return `${ namePrefix } copy${ extSuffix }`;
+  // No copy suffix found, add first copy
+  const newSuffix = formatCopy(copyFormat.firstCopyFormat, copyFormat.copyWord);
+  return `${namePrefix} ${newSuffix}${extSuffix}`;
 }
 
 /**
  * Generate a new unique label by checking if the label exists and appending "Copy" with index if needed
  */
-export const generateNewLabel = (
+export const relabelr = (
   proposedLabel: string,
   labels: string[],
+  copyFormat: CopyFormat = COPY_FORMATS.DEFAULT,
 ): string => {
-  const label: string = proposedLabel.trim() || 'Column Set';
+  const label: string = proposedLabel.trim() || 'Unnamed'; // Fallback to 'Unnamed' if empty
   const existing = new Set(labels);
 
   if (!existing.has(label)) {
     return label;
   }
 
-  let candidate = incrementFileName(label);
+  let candidate = incrementFileName(label, copyFormat);
 
   while (existing.has(candidate)) {
-    candidate = incrementFileName(candidate);
+    candidate = incrementFileName(candidate, copyFormat);
   }
 
   return candidate;
