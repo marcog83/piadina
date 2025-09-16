@@ -46,6 +46,7 @@
   "workspaces": [
     "packages/scheme-up",
     "packages/fetch-lines",
+    "packages/relabelr",
     "typedoc-plugins"
   ],
   "dependencies": {},

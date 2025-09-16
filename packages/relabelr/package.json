@@ -1,0 +1,115 @@
+{
+    "name": "@piadina/relabelr",
+    "version": "0.0.1",
+    "main": "./dist/index.umd.cjs",
+    "module": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "type": "module",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/marcog83/piadina.git",
+        "directory": "packages/relabelr"
+    },
+    "files": [
+        "dist"
+    ],
+    "exports": {
+        ".": {
+            "import": {
+                "development": "./dist/index.debug.js",
+                "production": "./dist/index.js",
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.js"
+            },
+            "require": {
+                "types": "./dist/index.d.ts",
+                "default": "./dist/index.umd.cjs"
+            }
+        }
+    },
+    "scripts": {
+        "dev": "wireit",
+        "tsc": "tsc",
+        "build:debug": "wireit",
+        "build": "wireit",
+        "lint": "wireit",
+        "test:watch": "vitest",
+        "test": "vitest run --coverage",
+        "update-deps": "npx npm-check-updates -u",
+        "publish":"npm publish --access public"
+    },
+    "wireit": {
+        "lint": {
+            "command": "eslint --color 'src/**/*.{ts,tsx}' './*.{ts,tsx,cjs}'",
+            "cache": false
+        },
+        "build:tsc": {
+            "command": "tsc --build",
+            "cache": false
+        },
+        "build:prod": {
+            "command": "vite build --emptyOutDir=false",
+            "cache": true,
+            "clean": "if-file-deleted",
+            "files": [
+                "src/**/*.{ts,tsx,css}",
+                "!src/**/*.test.{ts,tsx}",
+                "tsconfig.json",
+                "../../**/config/vite/base.ts"
+            ],
+            "output": [
+                "dist/**/*.js",
+                "dist/**/*.d.ts",
+                "tsconfig.tsbuildinfo"
+            ]
+        },
+        "build:debug": {
+            "command": "vite build --mode development --emptyOutDir=false",
+            "cache": true,
+            "clean": "if-file-deleted",
+            "files": [
+                "src/**/*.{ts,tsx,css}",
+                "!src/**/*.test.{ts,tsx}",
+                "tsconfig.json",
+                "../../**/config/vite/base.ts"
+            ],
+            "output": [
+                "dist/**/*.js",
+                "dist/**/*.d.ts",
+                "tsconfig.tsbuildinfo"
+            ]
+        },
+        "build": {
+            "dependencies": [
+                "build:tsc",
+                "build:prod",
+                "build:debug"
+            ]
+        },
+        "dev": {
+            "command": "npm run build:debug -- --watch",
+            "service": {
+                "readyWhen": {
+                    "lineMatches": "Server started at \\d+"
+                }
+            }
+        }
+    },
+    "sideEffects": false,
+    "keywords": [
+        "jsonl",
+        "json-lines",
+        "ndjson",
+        "streaming",
+        "fetch",
+        "async-generator",
+        "typescript",
+        "line-by-line",
+        "json",
+        "parser",
+        "http",
+        "api",
+        "data-streaming",
+        "newline-delimited"
+    ]
+}
