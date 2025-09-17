@@ -11,15 +11,19 @@ It’s a base (you can fill it with anything) → exactly like each package. —
 * **@piadina/fetch-jsonl**
   * Stream and parse JSON Lines (JSONL/NDJSON) directly with fetch. Yields parsed JSON objects one line at a time using async generators.
   * Perfect for handling large datasets, streaming APIs, and real-time data processing.
+  * [README & usage](packages/fetch-jsonl/README.md)
 * **@piadina/relabelr**
   * Smart label and filename conflict resolution with customizable copy formats. Automatically generates unique names like "Copy", "Copy (1)", or custom patterns.
   * Ideal for file management systems, document editors, and preventing duplicate names in UIs.
+  * [README & usage](packages/relabelr/README.md)
 
 ## Installation
 
 ```sh
 npm install @piadina/scheme-up
-````
+npm install @piadina/fetch-jsonl
+npm install @piadina/relabelr
+```
 
 ## License
 

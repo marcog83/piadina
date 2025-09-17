@@ -38,7 +38,7 @@ export class FetchJSONL {
   async *stream<T = unknown, TError extends Error = Error>(
     input: RequestInfo | URL,
     init?: RequestInit,
-  ): AsyncGenerator<T, void, unknown> {
+  ) {
     let request = input instanceof Request ? input : new Request(input, init);
     request = await this.applyBeforeRequestHooks(request);
 
