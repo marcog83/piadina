@@ -27,24 +27,61 @@ for await (const obj of fetcher.get<TestItem>("https://example.com/data.jsonl"))
 
 ## API
 
+All methods return an `AsyncGenerator` that yields parsed JSON objects one line at a time.
+
+### Method Signatures
+
 ```ts
-fetcher.get<T = unknown, TError extends Error = Error>(url: RequestInfo | URL, init?: RequestInit): AsyncGenerator<Awaited<T>, void, unknown>
-
-fetcher.post<T = unknown, TError extends Error = Error>(url: RequestInfo | URL, init?: RequestInit): AsyncGenerator<Awaited<T>, void, unknown>
-
-fetcher.put<T = unknown, TError extends Error = Error>(url: RequestInfo | URL, init?: RequestInit): AsyncGenerator<Awaited<T>, void, unknown>
-
-fetcher.patch<T = unknown, TError extends Error = Error>(url: RequestInfo | URL, init?: RequestInit): AsyncGenerator<Awaited<T>, void, unknown>
-
-fetcher.delete<T = unknown, TError extends Error = Error>(url: RequestInfo | URL, init?: RequestInit): AsyncGenerator<Awaited<T>, void, unknown>
+fetcher.get<T, TError>(url, init?)    // GET request
+fetcher.post<T, TError>(url, init?)   // POST request  
+fetcher.put<T, TError>(url, init?)    // PUT request
+fetcher.patch<T, TError>(url, init?)  // PATCH request
+fetcher.delete<T, TError>(url, init?) // DELETE request
 ```
 
-* **T** – type of parsed objects (default unknown)
-* **TError** – error type thrown on invalid JSON (default Error)
-* **url** – fetch input (URL or Request)
-* **init** – optional fetch init options
+### Full Type Signature
 
-Returns an async generator that yields one parsed JSON object per line.
+```ts
+<T = unknown, TError extends Error = Error>(
+  url: RequestInfo | URL, 
+  init?: RequestInit
+) => AsyncGenerator<Awaited<T>, void, unknown>
+```
+
+### Parameters
+
+- **`url`** — `RequestInfo | URL` — The endpoint to fetch from (URL string or Request object)
+- **`init`** — `RequestInit` — Optional fetch configuration (headers, body, etc.)
+
+### Type Parameters
+
+- **`T`** — Type of parsed JSON objects (defaults to `unknown`)
+- **`TError`** — Custom error type for JSON parsing failures (defaults to `Error`)
+
+### Returns
+
+`AsyncGenerator<T>` — Stream of parsed JSON objects, one per line
+
+### Example Usage
+
+```ts
+// Basic usage with type inference
+for await (const item of fetcher.get<User>('/api/users.jsonl')) {
+  console.log(item.name); // TypeScript knows item is User
+}
+
+// With custom error handling
+try {
+  for await (const data of fetcher.post<Data, ValidationError>('/api/data', {
+    body: JSON.stringify({ query: 'test' }),
+    headers: { 'Content-Type': 'application/json' }
+  })) {
+    console.log(data);
+  }
+} catch (error) {
+  // error is typed as ValidationError
+}
+```
 
 ### Example: Handling errors
 
